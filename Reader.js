@@ -5,6 +5,7 @@ const util = require("util")
 class Reader {
 
     constructor() {
+        //torna o metodo em uma promisse
         this.reader = util.promisify(fs.readFile);
     }
 

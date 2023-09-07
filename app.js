@@ -1,17 +1,20 @@
 var Reader = require("./Reader");
 var Processor = require("./Processor");
 var Table = require("./Table");
+var Writer = require("./Writer");
+var HtmlParser = require("./HtmlParser");
 
 var leitor = new Reader()
+var escritor = new Writer()
 
 async function main() {
     var dados = await leitor.Read("./lista.txt");
     var dadosProcessados = Processor.Process(dados);
     // console.log(dadosProcessados)
     var usuarios = new Table(dadosProcessados);
-
-    console.log(usuarios.RowCount)
-    console.log(usuarios.ColumnCount)
+    var html = await HtmlParser.Parse(usuarios)
+    
+    escritor.Write(Date.now()+".html",html)
 }
 
 main();
